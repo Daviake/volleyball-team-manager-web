@@ -28,7 +28,7 @@ Referências: regras R1–R16 e dúvidas D1–D16 em `java-project-analysis.md`.
 | Exclusão de jogador (R3) | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ |
 | Nome único / duplicados (R4) | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ |
 | Score de linha e de levantador (R5) | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ |
-| Seleção e ações rápidas (R6) | ✅ | ✅ (D16 pendente) | ✅ | ✅ | ⬜ | ⬜ |
+| Seleção e ações rápidas (R6) | ✅ | ✅ (D16 decidida: corrigido) | ✅ | ✅ | ⬜ | ⬜ |
 | Sorteio e balanceamento (R7) | ✅ | ✅ (D3, D4 pendentes) | ✅ | ✅ | ⬜ | ⬜ |
 | Delta elástico (R8) | ✅ | ✅ (D5, D6 pendentes) | ✅ | ✅ | ⬜ | ⬜ |
 | Placar, vitória, derrota, empate (R9) | ✅ | ✅ (D7 pendente) | ✅ | ✅ | ⬜ | ⬜ |

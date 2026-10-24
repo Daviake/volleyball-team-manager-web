@@ -96,12 +96,23 @@ describe("selectionService (R6)", () => {
     expect(getSelectionError(selection)).toBeNull();
   });
 
-  it("completar com 14 já selecionados e sem levantador passa de 14, como no Java (D16)", () => {
+  it("completar nunca passa de 14 (correção do P10, decisão D16)", () => {
     const players = buildPlayers(16, (index) => ({ prefersSetter: index >= 14 }));
     const full = select(players.slice(0, 14));
-    const { selection } = autoComplete(full, players);
-    expect(selection.playerIds).toHaveLength(16);
-    expect(getSelectionError(selection)).toBe("Você selecionou jogadores demais (16/14).");
+    const { selection, warning } = autoComplete(full, players);
+    expect(selection.playerIds).toHaveLength(14);
+    expect(selection.setterIds).toEqual([]);
+    expect(warning).toBe("Faltam 2 levantador(es). Marque manualmente quem vai levantar hoje.");
+  });
+
+  it("completar marca primeiro quem já está selecionado e costuma levantar, sem ocupar vaga", () => {
+    const players = buildPlayers(16, (index) => ({ prefersSetter: [0, 13, 14].includes(index) }));
+    // Só o primeiro está marcado como levantador hoje; o 14º costuma levantar, mas não foi marcado.
+    const full = { ...select(players.slice(0, 14)), setterIds: [players[0].id] };
+    const { selection, warning } = autoComplete(full, players);
+    expect(selection.playerIds).toHaveLength(14);
+    expect(selection.setterIds).toEqual([players[0].id, players[13].id]);
+    expect(warning).toBeNull();
   });
 
   it("lista com busca e filtros, selecionados no topo e depois em ordem alfabética", () => {

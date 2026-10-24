@@ -119,26 +119,30 @@ export function selectMonthly(players, settings = DEFAULT_SETTINGS) {
  * costuma levantar até ter 2; depois completa até 14 dando prioridade a quem não levanta
  * (ordem alfabética dentro de cada grupo).
  *
- * Diferença em relação ao Java (P4, corrigido): quem costuma levantar e entra na segunda fase
- * só vira "levantador hoje" se ainda houver vaga; no Java podiam ficar mais de 2 levantadores.
- *
- * Mantido do Java (dúvida D16): a primeira fase não confere o total de jogadores. Com 14 já
- * selecionados e menos de 2 levantadores, a seleção passa de 14 e a validação bloqueia o sorteio.
+ * Diferenças em relação ao Java:
+ * - P4 corrigido: quem costuma levantar e entra na segunda fase só vira "levantador hoje" se
+ *   ainda houver vaga; no Java podiam ficar mais de 2 levantadores.
+ * - P10 corrigido (decisão D16): a seleção nunca passa de 14. Na primeira fase, quem já está
+ *   selecionado e costuma levantar é marcado primeiro (não ocupa vaga); só depois entram jogadores
+ *   novos, e apenas se houver vaga. Se ainda faltar levantador, a tela recebe um aviso.
  */
 export function autoComplete(selection, players, settings = DEFAULT_SETTINGS) {
   const { playersPerDraw, settersPerDraw } = settings.draw;
   const sorted = sortPlayersByName(players);
   const playerIds = [...selection.playerIds];
   const setterIds = [...selection.setterIds];
-  const add = (list, id) => {
-    if (!list.includes(id)) list.push(id);
-  };
+  const candidates = sorted.filter((player) => player.prefersSetter && !setterIds.includes(player.id));
+  const alreadySelected = candidates.filter((player) => playerIds.includes(player.id));
+  const notSelected = candidates.filter((player) => !playerIds.includes(player.id));
 
-  for (const player of sorted) {
+  for (const player of alreadySelected) {
     if (setterIds.length >= settersPerDraw) break;
-    if (!player.prefersSetter || setterIds.includes(player.id)) continue;
-    add(playerIds, player.id);
-    add(setterIds, player.id);
+    setterIds.push(player.id);
+  }
+  for (const player of notSelected) {
+    if (setterIds.length >= settersPerDraw || playerIds.length >= playersPerDraw) break;
+    playerIds.push(player.id);
+    setterIds.push(player.id);
   }
 
   const remaining = sorted
@@ -149,7 +153,11 @@ export function autoComplete(selection, players, settings = DEFAULT_SETTINGS) {
     playerIds.push(player.id);
     if (player.prefersSetter && setterIds.length < settersPerDraw) setterIds.push(player.id);
   }
-  return { selection: { playerIds, setterIds }, warning: null };
+  const warning =
+    setterIds.length < settersPerDraw
+      ? `Faltam ${settersPerDraw - setterIds.length} levantador(es). Marque manualmente quem vai levantar hoje.`
+      : null;
+  return { selection: { playerIds, setterIds }, warning };
 }
 
 /**

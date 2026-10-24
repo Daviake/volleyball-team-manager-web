@@ -632,7 +632,7 @@ O detalhamento fica para a Etapa 2 (`docs/web-architecture.md`).
 | D13 | Quer importar os dados atuais do banco H2 para a versão web? | Sim, via JSON exportado da API Java |
 | D14 | Já existe uma pasta `volleyball-team-manager-web` no seu computador (esqueleto da tentativa anterior). Recomeçar do zero ou aproveitar? | Recomeçar, guardando a antiga como referência |
 | D15 | Os defeitos P1–P9 devem ser reproduzidos ou corrigidos? | Corrigir P1, P3, P4, P6 e P7 registrando a diferença; manter P8 até decidir D9; P9 com confirmação reforçada |
-| D16 | "Completar automaticamente" pode passar de 14 jogadores (P10). Corrigir? | Manter como no Java até decidir; proposta de correção: só adicionar levantador se houver vaga |
+| D16 | "Completar automaticamente" pode passar de 14 jogadores (P10). Corrigir? | **Decidida em 24/10/2026: corrigir** (a seleção nunca passa de 14) |
 
 ---
 

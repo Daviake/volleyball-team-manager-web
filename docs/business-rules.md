@@ -76,7 +76,7 @@ A seleção é `{ playerIds, setterIds }`, na ordem em que os jogadores foram ma
 | Levantador hoje (`toggleSetter`) | Máximo 2. Só para quem está selecionado (no Java a opção só aparece para selecionados). |
 | Últimos 14 (`selectLastLineup`) | Partida mais recente por data; só jogadores ainda cadastrados; levantadores = os daquela partida. Avisos do Java para histórico vazio e para menos de 14. |
 | Mensalistas (`selectMonthly`) | **Substitui** a seleção. 2 primeiros mensalistas levantadores (ordem alfabética) como levantadores; depois mensalistas de linha; depois os demais mensalistas levantadores, sem marcá-los. Aviso se ficar abaixo de 14. |
-| Completar (`autoComplete`) | **Mantém** a seleção. Garante 2 levantadores com quem costuma levantar; completa até 14 priorizando a linha (ordem alfabética em cada grupo). **[DIFERENÇA]** P4 corrigido: na segunda fase, quem costuma levantar só vira levantador hoje se houver vaga. **[MANTIDO, D16]** A primeira fase não confere o total: com 14 selecionados e menos de 2 levantadores, a seleção passa de 14 e a validação bloqueia o sorteio. |
+| Completar (`autoComplete`) | **Mantém** a seleção. Garante 2 levantadores com quem costuma levantar; completa até 14 priorizando a linha (ordem alfabética em cada grupo). **[DIFERENÇA]** P4 corrigido: na segunda fase, quem costuma levantar só vira levantador hoje se houver vaga. **[DIFERENÇA]** P10 corrigido (D16, decidido por Davi em 24/10/2026): a seleção nunca passa de 14. Primeiro são marcados como levantador hoje os já selecionados que costumam levantar (não ocupam vaga); depois entram jogadores novos que costumam levantar, só se houver vaga. Se ainda faltar levantador: `Faltam N levantador(es). Marque manualmente quem vai levantar hoje.` |
 | Lista (`filterAndSortPlayers`) | Busca "contém", sem diferenciar maiúsculas e com acentos; filtros por preferência e mensalista; selecionados primeiro, depois ordem alfabética. |
 | Validação (`getSelectionError`) | Mensagens do Java: `Selecione mais N jogador(es).`, `Você selecionou jogadores demais (N/14).`, `É necessário selecionar exatamente 2 levantadores.`, `Você selecionou levantadores demais.` |
 
@@ -171,7 +171,7 @@ Ordem alfabética: `localeCompare` com `pt-BR` fixo (no Java, o idioma do navega
 | D9 | Troca manual mantém o score antigo (P8) |
 | D10 | Jogador do mês usa todo o histórico |
 | D11 | Adaptador de leitura XLSX/CSV não criado até a decisão |
-| **D16 (nova)** | "Completar automaticamente" pode passar de 14 quando já há 14 selecionados sem 2 levantadores (P10). Mantido como no Java; proposta: na primeira fase, só adicionar levantador se houver vaga, ou trocar o último jogador de linha selecionado |
+| D16 | **Decidida (24/10/2026): corrigir.** "Completar automaticamente" nunca passa de 14 (P10 corrigido) |
 
 ## Resumo das diferenças em relação ao Java
 
@@ -188,3 +188,4 @@ Ordem alfabética: `localeCompare` com `pt-BR` fixo (no Java, o idioma do navega
 | 9 | Importação tudo ou nada | Java não era transacional |
 | 10 | Ordem dos jogadores no sorteio = ordem do pedido | Java dependia da ordem do banco; torna o resultado reproduzível |
 | 11 | Rascunhos descartados pelo limite são informados ao chamador | Permite avisar; a regra de corte é a mesma |
+| 12 | "Completar" nunca passa de 14 e marca primeiro os já selecionados | P10 (D16) |
