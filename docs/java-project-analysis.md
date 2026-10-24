@@ -308,6 +308,7 @@ frontend/
 - **Problemas:**
   - **[PROBLEMA P4]** Em "Completar automaticamente", ao completar até 14, quem tem preferência de levantador é adicionado ao conjunto de levantadores **sem limite**, podendo passar de 2 (a validação então bloqueia o sorteio com "Você selecionou levantadores demais").
   - "Selecionar mensalistas" e "Completar" não consideram mulheres.
+  - **[PROBLEMA P10]** (encontrado na Etapa 5) Em "Completar automaticamente", a primeira fase (garantir 2 levantadores) não confere o total: com 14 já selecionados e menos de 2 levantadores, a seleção passa de 14 e o sorteio fica bloqueado com "Você selecionou jogadores demais". **[DÚVIDA D16]**
 
 ### R7. Formação dos times, sorteio e balanceamento
 
@@ -631,6 +632,7 @@ O detalhamento fica para a Etapa 2 (`docs/web-architecture.md`).
 | D13 | Quer importar os dados atuais do banco H2 para a versão web? | Sim, via JSON exportado da API Java |
 | D14 | Já existe uma pasta `volleyball-team-manager-web` no seu computador (esqueleto da tentativa anterior). Recomeçar do zero ou aproveitar? | Recomeçar, guardando a antiga como referência |
 | D15 | Os defeitos P1–P9 devem ser reproduzidos ou corrigidos? | Corrigir P1, P3, P4, P6 e P7 registrando a diferença; manter P8 até decidir D9; P9 com confirmação reforçada |
+| D16 | "Completar automaticamente" pode passar de 14 jogadores (P10). Corrigir? | **Decidida em 24/10/2026: corrigir** (a seleção nunca passa de 14) |
 
 ---
 
