@@ -1,0 +1,90 @@
+/* Tokens herdados da identidade visual do Projeto Volei (frontend/src/styles/app.css). */
+:root {
+  --azul-escuro: #0f2a54;
+  --azul: #1d4e89;
+  --azul-claro: #4f7fc4;
+  --laranja: #ff8c1a;
+  --laranja-claro: #ffb066;
+  --cinza-claro: #f4f6fb;
+  --cinza-borda: #e3e7ef;
+  --texto: #1c1f26;
+  --texto-suave: #4a5262;
+  --verde: #1e8e5a;
+  --vermelho: #c0392b;
+  --raio: 16px;
+  --raio-pequeno: 10px;
+  --sombra: 0 2px 10px rgba(15, 42, 84, 0.06), 0 1px 2px rgba(15, 42, 84, 0.04);
+  --gradiente-app: linear-gradient(160deg, #f4f6fb 0%, #eaf0fb 45%, #f6f0e6 100%);
+  --gradiente-header: linear-gradient(120deg, var(--azul-escuro) 0%, var(--azul) 100%);
+  --alvo-toque: 44px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--gradiente-app);
+}
+
+:focus-visible {
+  outline: 3px solid var(--laranja);
+  outline-offset: 2px;
+}
+
+.app-header {
+  background: var(--gradiente-header);
+  color: #fff;
+  padding: 0.75rem 1rem;
+}
+
+.app-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+}
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.app-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--alvo-toque);
+  padding: 0 0.85rem;
+  border-radius: var(--raio-pequeno);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app-nav a.active {
+  background: var(--laranja);
+  color: var(--azul-escuro);
+}
+
+.app-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.page {
+  background: #fff;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+  padding: 1rem 1.25rem;
+}
+
+.empty-state {
+  color: var(--texto-suave);
+}
