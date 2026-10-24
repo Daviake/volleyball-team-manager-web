@@ -50,7 +50,13 @@ export default [
   {
     files: ["src/services/**/*.js"],
     rules: {
-      "no-restricted-imports": ["error", { patterns: [noReact, noStorage, noHooks] }]
+      "no-restricted-imports": ["error", { patterns: [noReact, noStorage, noHooks] }],
+      // Serviços recebem `random` e `now` por parâmetro (docs/web-architecture.md, seção 6).
+      "no-restricted-properties": [
+        "error",
+        { object: "Math", property: "random", message: "Receba o gerador `random` por parâmetro (utils/random.js)." },
+        { object: "Date", property: "now", message: "Receba `now` por parâmetro (utils/dates.js)." }
+      ]
     }
   },
   {
